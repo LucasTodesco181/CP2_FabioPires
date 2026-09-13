@@ -1,0 +1,128 @@
+== lsblk -f ==
+NAME                                          FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                                     
+├─sda1                                        vfat        FAT32          43A5-6F65                              1012.9M     1% /boot/efi
+├─sda2                                        xfs                        6027fbbc-5ecb-4642-8a75-9924d9d1c22b    752.2M    22% /boot
+└─sda3                                        crypto_LUKS 2              c7234a71-0d02-4f8b-b377-f88f265ec5a9           
+  └─luks-c7234a71-0d02-4f8b-b377-f88f265ec5a9 LVM2_member LVM2 001       8a7QYD-nkKa-ix5y-9pZO-XQo2-XZR2-LujdEU         
+    ├─vg_sistema-root                         xfs                        6e49597c-17a9-4dae-a118-40dcb2f8a8e9     13.8G     7% /
+    ├─vg_sistema-swap                         swap        1              9bdfc36b-d691-4648-b534-e530afc6053b                  [SWAP]
+    ├─vg_sistema-var                          xfs                        6c41ad18-fdb2-4e4e-a913-f017e60a6d83      7.7G     3% /var
+    ├─vg_sistema-var_log                      xfs                        df306482-da95-4e15-ac3b-735a0a1fdd2f      4.8G     3% /var/log
+    ├─vg_sistema-var_tmp                      xfs                        8d6af209-6dff-419b-9a68-464909db966d      2.8G     3% /var/tmp
+    ├─vg_sistema-home                         xfs                        b7172033-da57-483f-9a0e-2b1970b10d05      9.7G     2% /home
+    └─vg_sistema-tmp                          xfs                        868a0758-1e2e-4f44-81d4-e591778b6a9a      2.8G     3% /tmp
+sr0                                                                                                                     
+== luksDump ==
+LUKS header information
+Version:        2
+Epoch:          4
+Metadata area:  16384 [bytes]
+Keyslots area:  16744448 [bytes]
+UUID:           c7234a71-0d02-4f8b-b377-f88f265ec5a9
+Label:          (no label)
+Subsystem:      (no subsystem)
+Flags:          allow-discards
+
+Data segments:
+  0: crypt
+        offset: 16777216 [bytes]
+        length: (whole device)
+        cipher: aes-xts-plain64
+        sector: 512 [bytes]
+
+Keyslots:
+  0: luks2
+        Key:        512 bits
+        Priority:   normal
+        Cipher:     aes-xts-plain64
+        Cipher key: 512 bits
+        PBKDF:      argon2id
+        Time cost:  4
+        Memory:     502191
+        Threads:    2
+        Salt:       a0 ae 92 ab 43 01 cf c3 ca e5 a4 98 52 7e b9 6f
+                    da 53 fb 1c a7 6f 05 7a c3 43 1e 8d bd d0 09 2a
+        AF stripes: 4000
+        AF hash:    sha256
+        Area offset:32768 [bytes]
+        Area length:258048 [bytes]
+        Digest ID:  0
+Tokens:
+Digests:
+  0: pbkdf2
+        Hash:       sha256
+        Iterations: 287754
+        Salt:       f8 f2 2a f4 32 2e e8 21 24 97 15 75 ca cf fc 5d
+                    05 81 eb 3a b7 a1 7f 2b 3a 86 c1 1b 02 bb 06 dc
+        Digest:     62 9b e2 2e 89 ce 92 38 50 3c 60 64 4a 6c 2a 33
+                    37 56 61 6b 5e 6c 51 3c a6 80 43 00 de 4d a6 86
+== pvs/vgs/lvs ==
+  PV                                                    VG         Fmt  Attr PSize  PFree
+  /dev/mapper/luks-c7234a71-0d02-4f8b-b377-f88f265ec5a9 vg_sistema lvm2 a--  57.98g 9.98g
+  VG         #PV #LV #SN Attr   VSize  VFree
+  vg_sistema   1   7   0 wz--n- 57.98g 9.98g
+  LV      VG         Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  home    vg_sistema -wi-ao---- 10.00g
+  root    vg_sistema -wi-ao---- 15.00g
+  swap    vg_sistema -wi-ao----  4.00g
+  tmp     vg_sistema -wi-ao----  3.00g
+  var     vg_sistema -wi-ao----  8.00g
+  var_log vg_sistema -wi-ao----  5.00g
+  var_tmp vg_sistema -wi-ao----  3.00g
+== findmnt ==
+TARGET                                                                                                                  SOURCE                         FSTYPE     OPTIONS
+/                                                                                                                       /dev/mapper/vg_sistema-root    xfs        rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+├─/boot                                                                                                                 /dev/sda2                      xfs        rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+│ └─/boot/efi                                                                                                           /dev/sda1                      vfat       rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=winnt,errors=remount-ro
+├─/dev                                                                                                                  devtmpfs                       devtmpfs   rw,nosuid,seclabel,size=1968648k,nr_inodes=492162,mode=755,inode64
+│ ├─/dev/hugepages                                                                                                      hugetlbfs                      hugetlbfs  rw,nosuid,nodev,relatime,seclabel,pagesize=2M
+│ ├─/dev/mqueue                                                                                                         mqueue                         mqueue     rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/dev/shm                                                                                                            tmpfs                          tmpfs      rw,nosuid,nodev,seclabel,inode64
+│ └─/dev/pts                                                                                                            devpts                         devpts     rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000
+├─/sys                                                                                                                  sysfs                          sysfs      rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/fs/selinux                                                                                                     selinuxfs                      selinuxfs  rw,nosuid,noexec,relatime
+│ ├─/sys/kernel/debug                                                                                                   debugfs                        debugfs    rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/kernel/tracing                                                                                                 tracefs                        tracefs    rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/fs/fuse/connections                                                                                            fusectl                        fusectl    rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/kernel/security                                                                                                securityfs                     securityfs rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/cgroup                                                                                                      cgroup2                        cgroup2    rw,nosuid,nodev,noexec,relatime,seclabel,nsdelegate,memory_recursiveprot
+│ ├─/sys/fs/pstore                                                                                                      pstore                         pstore     rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/firmware/efi/efivars                                                                                           efivarfs                       efivarfs   rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/bpf                                                                                                         bpf                            bpf        rw,nosuid,nodev,noexec,relatime,mode=700
+│ └─/sys/kernel/config                                                                                                  configfs                       configfs   rw,nosuid,nodev,noexec,relatime
+├─/proc                                                                                                                 proc                           proc       rw,nosuid,nodev,noexec,relatime
+│ └─/proc/sys/fs/binfmt_misc                                                                                            systemd-1                      autofs     rw,relatime,fd=35,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=22595
+├─/run                                                                                                                  tmpfs                          tmpfs      rw,nosuid,nodev,seclabel,size=796756k,nr_inodes=819200,mode=755,inode64
+│ ├─/run/credentials/systemd-cryptsetup@luks\x5cx2dc7234a71\x5cx2d0d02\x5cx2d4f8b\x5cx2db377\x5cx2df88f265ec5a9.service tmpfs                          tmpfs      ro,nosuid,nodev,noexec,relatime,nosymfollow,seclabel,size=1024k,nr_inodes=1024,mode=700,inode64,noswap
+│ ├─/run/credentials/systemd-journald.service                                                                           tmpfs                          tmpfs      ro,nosuid,nodev,noexec,relatime,nosymfollow,seclabel,size=1024k,nr_inodes=1024,mode=700,inode64,noswap
+│ ├─/run/user/0                                                                                                         tmpfs                          tmpfs      rw,nosuid,nodev,relatime,seclabel,size=398376k,nr_inodes=99594,mode=700,inode64
+│ └─/run/credentials/getty@tty1.service                                                                                 tmpfs                          tmpfs      ro,nosuid,nodev,noexec,relatime,nosymfollow,seclabel,size=1024k,nr_inodes=1024,mode=700,inode64,noswap
+├─/var                                                                                                                  /dev/mapper/vg_sistema-var     xfs        rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+│ ├─/var/log                                                                                                            /dev/mapper/vg_sistema-var_log xfs        rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+│ └─/var/tmp                                                                                                            /dev/mapper/vg_sistema-var_tmp xfs        rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+├─/home                                                                                                                 /dev/mapper/vg_sistema-home    xfs        rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+└─/tmp                                                                                                                  /dev/mapper/vg_sistema-tmp     xfs        rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+== fstab ==
+
+#
+# /etc/fstab
+# Created by anaconda on Sun Sep 13 15:42:11 2026
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+UUID=6e49597c-17a9-4dae-a118-40dcb2f8a8e9 /                       xfs     defaults,x-systemd.device-timeout=0 0 0
+UUID=6027fbbc-5ecb-4642-8a75-9924d9d1c22b /boot                   xfs     defaults        0 0
+UUID=43A5-6F65          /boot/efi               vfat    umask=0077,shortname=winnt 0 2
+UUID=b7172033-da57-483f-9a0e-2b1970b10d05 /home                   xfs     defaults,x-systemd.device-timeout=0 0 0
+UUID=868a0758-1e2e-4f44-81d4-e591778b6a9a /tmp                    xfs     defaults,x-systemd.device-timeout=0 0 0
+UUID=6c41ad18-fdb2-4e4e-a913-f017e60a6d83 /var                    xfs     defaults,x-systemd.device-timeout=0 0 0
+UUID=df306482-da95-4e15-ac3b-735a0a1fdd2f /var/log                xfs     defaults,x-systemd.device-timeout=0 0 0
+UUID=8d6af209-6dff-419b-9a68-464909db966d /var/tmp                xfs     defaults,x-systemd.device-timeout=0 0 0
+UUID=9bdfc36b-d691-4648-b534-e530afc6053b none                    swap    defaults,x-systemd.device-timeout=0 0 0
+== crypttab ==
+luks-c7234a71-0d02-4f8b-b377-f88f265ec5a9 UUID=c7234a71-0d02-4f8b-b377-f88f265ec5a9 none discard,x-initrd.attach
