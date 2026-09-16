@@ -134,9 +134,6 @@ reboot
    Rígido → Criar novo disco → VDI, dinâmico, **20 GB**
 3. Ligar a VM novamente
 
-📸 **Print:** tela "Detalhes" da VM já com os dois discos →
-`evidencias/00-specs-vm-depois-extend.png`
-
 Identificar o novo disco:
 
 ```bash
