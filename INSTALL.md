@@ -31,9 +31,6 @@ sha256sum AlmaLinux-10.2-x86_64-minimal.iso
    - **Rede → Adaptador 1**: modo **NAT** (nunca Bridge)
 5. Ligar a VM
 
-📸 **Print:** tela "Detalhes" da VM no VirtualBox Manager, mostrando RAM,
-CPUs, disco e rede → `evidencias/00-specs-vm-antes-extend.png`
-
 ---
 
 ## 3. Particionamento manual (LUKS2 + LVM)
@@ -75,8 +72,6 @@ Na tela "Destino da instalação" do Anaconda:
 > as mudanças no disco. Anote-a em local compartilhado do grupo nesse
 > momento — não existe recuperação sem ela.
 
-📸 **Print:** tela de resumo do particionamento do Anaconda antes de
-confirmar → `evidencias/01-resumo-particionamento-anaconda.png`
 
 Confirmar e seguir a instalação normalmente (usuário, senha de root, etc).
 
