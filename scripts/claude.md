@@ -1,6 +1,6 @@
 O esqueleto base do script foi criado sem o claude. Mas, na parte de estruturar, organizar e arrumar erros, o claude foi utilizado.
 
-Claude, esse é o meu código desta atividade presente no PDF da parte do , é a parte do AlmaLinux. Seguindo os requisitos do professor que estão presentes nos slides, você conseguiria dar uma organizada no código, arrumar uma coisa ou outra e se possível mantendo o que eu já fiz e apenas fazer ajustes em cima do que foi feito?. Além disso, mantenha o código simples, funcional e fácil de ler em caso de erro ou se for necessário fazer alguma alteração.
+Claude, esse é o meu código desta atividade presente no PDF da parte do AlmaLinux. Seguindo os requisitos do professor que estão presentes nos slides, você conseguiria dar uma organizada no código, arrumar uma coisa ou outra e se possível mantendo o que eu já fiz e apenas fazer ajustes em cima do que foi feito?. Além disso, mantenha o código simples, funcional e fácil de ler em caso de erro ou se for necessário fazer alguma alteração.
 Anexo:CP 02 - Ambiente Linux - RHEL.pdf; fim-check.sh
 
 Resposta:
