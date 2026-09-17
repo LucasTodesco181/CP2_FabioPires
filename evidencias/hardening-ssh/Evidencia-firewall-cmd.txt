@@ -1,0 +1,19 @@
+firewall-cmd --list-all
+public (default, active)
+  target: default
+  ingress-priority: 0
+  egress-priority: 0
+  icmp-block-inversion: no
+  interfaces: enp0s3
+  sources: 
+  services: cockpit dhcpv6-client
+  ports: 
+  protocols: 
+  forward: yes
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+        rule family="ipv4" port port="2222" protocol="tcp" accept limit value="5/m"
+        rule family="ipv6" port port="2222" protocol="tcp" accept limit value="5/m"

@@ -1,0 +1,60 @@
+Arquivo de Access List que foi criado em /etc/ssh/sshd_confid.d/
+
+[root@localhost sshd_config.d]# cat 20-access-control.conf 
+AllowGroups sshusers
+
+Dessa forma apenas usuários do grupo sshusers podem se conectar
+
+Usuários membros de sshusers:
+
+[root@localhost sshd_config.d]# cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+
+...Omitido...
+ 
+arisson:x:1000:
+sshusers:x:1001:arisson
+test-user:x:1002:
+
+Usuário permitido para acessar:
+
+ssh -i ~/.ssh/id_ed25519_hostini arisson@192.168.15.12 -p 2222
+***************************************************************************
+                           AVISO DE ACESSO       
+***************************************************************************
+Este sistema é de uso estrito e exclusivo de usuários autorizados.
+Todas as conexões e atividades são monitoradas, registradas e auditadas.
+
+O acesso não autorizado ou o uso indevido deste sistema constitui uma
+violação das políticas internas e da legislação vigente, sujeitando o
+infrator a sanções administrativas, processos civis e criminais.
+
+Se você não possui autorização explícita, desconecte-se imediatamente!
+
+***************************************************************************
+
+Enter passphrase for key '/home/kali/.ssh/id_ed25519_hostini': 
+Last login: Tue Sep 15 23:15:36 2026 from 192.168.15.8
+[arisson@localhost ~]$ 
+
+Usuário que não está no grupo permitido:
+
+ssh -i ~/id_rsa test-user@192.168.15.12 -p 2222 
+***************************************************************************
+                           AVISO DE ACESSO       
+***************************************************************************
+Este sistema é de uso estrito e exclusivo de usuários autorizados.
+Todas as conexões e atividades são monitoradas, registradas e auditadas.
+
+O acesso não autorizado ou o uso indevido deste sistema constitui uma
+violação das políticas internas e da legislação vigente, sujeitando o
+infrator a sanções administrativas, processos civis e criminais.
+
+Se você não possui autorização explícita, desconecte-se imediatamente!
+
+***************************************************************************
+
+test-user@192.168.15.12: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).

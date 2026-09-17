@@ -1,0 +1,24 @@
+=== systemctl status sshd ===
+● sshd.service - OpenSSH server daemon
+     Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2026-09-14 20:53:59 -03; 8h ago
+ Invocation: 92b888768ce54b0d955389a4271788f4
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 856 (sshd)
+      Tasks: 1 (limit: 10618)
+     Memory: 6.6M (peak: 8.9M)
+        CPU: 277ms
+     CGroup: /system.slice/sshd.service
+             └─856 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+Sep 14 20:58:15 localhost.localdomain sshd-session[1814]: Accepted publickey for arisson from 172.20.134.127 port 58334 ssh2: ED25519 SHA256:gPHJg/WlkHa8oWSOM1RwJiNr4QmemxemrqKbb2/To+4
+Sep 14 20:58:16 localhost.localdomain sshd-session[1814]: pam_unix(sshd:session): session opened for user arisson(uid=1000) by arisson(uid=0)
+Sep 14 20:58:36 localhost.localdomain sshd-session[1861]: Unable to negotiate with 127.0.0.1 port 55522: no matching cipher found. Their offer: aes128-cbc,aes256-cbc [preauth]
+Sep 15 02:31:02 localhost.localdomain sshd[856]: Timeout before authentication for connection from 192.168.15.8 to 192.168.15.6, pid = 2111
+Sep 15 02:31:28 localhost.localdomain sshd[856]: drop connection #0 from [192.168.15.8]:50764 on [192.168.15.6]:2222 penalty: exceeded LoginGraceTime
+Sep 15 02:31:59 localhost.localdomain sshd[856]: drop connection #0 from [192.168.15.8]:50765 on [192.168.15.6]:2222 penalty: exceeded LoginGraceTime
+Sep 15 02:32:18 localhost.localdomain sshd[856]: drop connection #0 from [192.168.15.8]:50766 on [192.168.15.6]:2222 penalty: exceeded LoginGraceTime
+Sep 15 02:32:51 localhost.localdomain sshd-session[2118]: Accepted publickey for arisson from 192.168.15.8 port 50767 ssh2: ED25519 SHA256:gPHJg/WlkHa8oWSOM1RwJiNr4QmemxemrqKbb2/To+4
+Sep 15 02:32:52 localhost.localdomain sshd-session[2118]: pam_unix(sshd:session): session opened for user arisson(uid=1000) by arisson(uid=0)
+Sep 15 05:08:53 localhost.localdomain sshd-session[2586]: Unable to negotiate with 127.0.0.1 port 35854: no matching cipher found. Their offer: aes128-cbc,aes256-cbc [preauth]

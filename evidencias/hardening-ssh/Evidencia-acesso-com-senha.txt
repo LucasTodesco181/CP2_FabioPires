@@ -1,0 +1,16 @@
+ssh arisson@192.168.15.6 -p 2222
+***************************************************************************
+                           AVISO DE ACESSO       
+***************************************************************************
+Este sistema é de uso estrito e exclusivo de usuários autorizados.
+Todas as conexões e atividades são monitoradas, registradas e auditadas.
+
+O acesso não autorizado ou o uso indevido deste sistema constitui uma
+violação das políticas internas e da legislação vigente, sujeitando o
+infrator a sanções administrativas, processos civis e criminais.
+
+Se você não possui autorização explícita, desconecte-se imediatamente!
+
+***************************************************************************
+
+arisson@192.168.15.6: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
